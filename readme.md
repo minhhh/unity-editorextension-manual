@@ -477,9 +477,58 @@ public class MyAttributeDrawer : DecoratorDrawer
 
 ## Custom Editor
 
-* [Expose property in inspector](http://wiki.unity3d.com/index.php?title=Expose_properties_in_inspector)
+Unity allows creating a custom inspector for your custom defined classes.
 
-[ScriptableObject and AssetDatabase](https://www.youtube.com/watch?v=74Ph6y0rR-g)
+To create a new inspector, create a new `EditorClass` and decorate it with `CustomEditor` attribute.
+
+```
+[CustomEditor(typeof(MySettingsClass))]
+public class MySettingsEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+    }
+
+    public override void OnSceneGUI()
+    {
+    }
+
+    public override void OnPreviewGUI (Rect r, GUIStyle background)
+    {
+    }
+}
+```
+
+Real world example of Custom Inspector: (https://github.com/EsotericSoftware/spine-runtimes/blob/master/spine-unity/Assets/spine-unity/Editor/SkeletonRendererInspector.cs)
+
+Example of OnPreviewGUI: [Unity: ScriptableObject and AssetDatabase](https://www.youtube.com/watch?v=74Ph6y0rR-g)
+
+### SceneView
+
+You can draw GUI stuff on the Scene View with `SceneView.onSceneGUIDelegate += OnSceneGUI;`. Inside a CustomEditor, you can use the function `OnSceneGUI`.
+
+Example
+
+```
+public void OnSceneGUI ()
+{
+    Handles.BeginGUI ();
+    ...
+    Handles.EndGUI ();
+}
+```
+
+Real world example of using Scene View: [Editor Scripting from the real world](https://www.youtube.com/watch?v=s1o0gZwJS-4), SplineEditor of [Xffect Editor](https://www.assetstore.unity3d.com/en/#!/content/3810), and  [MeshVisualizeWindow.cs](https://gist.github.com/TJHeuvel/c4f8d218a0d774682560a8f348a90dff)
+
+
+
+**References**
+
+* [Property Drawers & Custom Inspectors](https://unity3d.com/learn/tutorials/topics/interface-essentials/property-drawers-custom-inspectors)
+* [Unity Editor Extensions](http://www.tallior.com/unity-editor-extensions/)
+* [Expose property in inspector](http://wiki.unity3d.com/index.php?title=Expose_properties_in_inspector)
+* [ScriptableObject and AssetDatabase](https://www.youtube.com/watch?v=74Ph6y0rR-g)
+
 
 ## Gizmos
 Gizmos are used to give visual debugging or setup aids in the scene view.
@@ -502,25 +551,10 @@ void OnDrawGizmos ()
 ```
 
 **References**
+
 * [How to Add Your Own Tools to Unity’s Editor](https://code.tutsplus.com/tutorials/how-to-add-your-own-tools-to-unitys-editor--active-10047)
 * [Gizmos](https://docs.unity3d.com/ScriptReference/Gizmos.html)
 
-## SceneView
-
-You can draw GUI stuff on the Scene View with `SceneView.onSceneGUIDelegate += OnSceneGUI;`. Inside a CustomEditor, you can use the function `OnSceneGUI`.
-
-Check [Editor Scripting from the real world](https://www.youtube.com/watch?v=s1o0gZwJS-4) and [MeshVisualizeWindow.cs](https://gist.github.com/TJHeuvel/c4f8d218a0d774682560a8f348a90dff)
-
-Example
-
-```
-public void OnSceneGUI ()
-{
-    Handles.BeginGUI ();
-    ...
-    Handles.EndGUI ();
-}
-```
 
 ## EditorApplication.hierarchyWindowItemOnGUI
 Delegate for OnGUI events for every visible list item in the HierarchyWindow.
@@ -548,6 +582,9 @@ public static class HierarchyDemo
 
 ## Miscs
 * [Editor Default Resources](http://anchan828.github.io/editor-manual/web/part2-beginner.html)
+
+## Tips and Tricks
+
 
 ## References
 * [Unity Editor Extensions](http://www.tallior.com/unity-editor-extensions/)
