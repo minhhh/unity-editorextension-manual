@@ -477,7 +477,7 @@ public class MyAttributeDrawer : DecoratorDrawer
 
 ## Custom Editor
 
-Unity allows creating a custom inspector for your custom defined classes.
+Unity allows creating a custom inspector for built-in classes or your custom classes.
 
 To create a new inspector, create a new `EditorClass` and decorate it with `CustomEditor` attribute.
 
@@ -519,7 +519,6 @@ public void OnSceneGUI ()
 ```
 
 Real world example of using Scene View: [Editor Scripting from the real world](https://www.youtube.com/watch?v=s1o0gZwJS-4), SplineEditor of [Xffect Editor](https://www.assetstore.unity3d.com/en/#!/content/3810), and  [MeshVisualizeWindow.cs](https://gist.github.com/TJHeuvel/c4f8d218a0d774682560a8f348a90dff)
-
 
 
 **References**
@@ -577,8 +576,11 @@ public static class HierarchyDemo
 ```
 
 ## AssetPostProcessor
+AssetPostprocessor lets you hook into the import pipeline and run scripts prior or after importing assets.
 
-* [Property Drawers & Custom Inspectors](https://unity3d.com/learn/tutorials/topics/interface-essentials/property-drawers-custom-inspectors)
+Example: [Property Drawers & Custom Inspectors](https://unity3d.com/learn/tutorials/topics/interface-essentials/property-drawers-custom-inspectors)
+
+Real world example: [unity-dither4444](https://github.com/keijiro/unity-dither4444)
 
 ## Miscs
 * [Editor Default Resources](http://anchan828.github.io/editor-manual/web/part2-beginner.html)
